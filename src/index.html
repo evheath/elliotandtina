@@ -1,0 +1,107 @@
+<!-- <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WeddingAngular</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: " en-US" }}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- {% seo %} -->
+  <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+  <script src=" https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
+  <script>
+    // console.log("start");
+    var firebaseConfig = {
+      apiKey: "AIzaSyA05ANqcrmkv-zGgo35y-mGyEwM42UkPlM",
+      authDomain: "elliotandtina.firebaseapp.com",
+      projectId: "elliotandtina",
+      storageBucket: "elliotandtina.appspot.com",
+      messagingSenderId: "1090811861387",
+      appId: "1:1090811861387:web:e00d750cacf1002d7fb78e"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <!-- <h1>{{ site.title | default: site.github.repository_name }}</h1> -->
+
+      <ul class="downloads">
+        <li><a href="/">Info and<strong>FAQ</strong></a></li>
+        <li><a href="/lodging.html">Hotels and <strong>Lodging</strong></a></li>
+        <li><a href="/venue.html">About the <strong>Venue</strong></a></li>
+      </ul>
+
+      <!-- {% if site.logo %} -->
+      <img src="/assets/img/us.jpg" alt="Logo" />
+      <!-- {% endif %} -->
+
+      <p>We're getting married!</p>
+
+      <!-- {% if site.github.is_project_page %}
+      <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{
+            site.github.repository_nwo }}</small></a></p>
+      {% endif %} -->
+
+      <!-- {% if site.github.is_user_page %}
+      <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
+      {% endif %} -->
+
+      <!-- {% if site.show_downloads %} -->
+
+
+      <ul class="downloads">
+        <li><a href="https://goo.gl/maps/GiBVsga2FhPUyfJP9">Google Maps <strong><i class='fa fa-map-marker'></i>
+              Directions</strong></a>
+        </li>
+        <li><a href="/upload.html">Upload<strong>Pictures</strong></a></li>
+        <li><a href="/rsvp.html">Coming?<strong>RSVP</strong></a></li>
+      </ul>
+      <!-- {% endif %} -->
+
+
+    </header>
+    <section>
+
+      {{ content }}
+      <app-root></app-root>
+    </section>
+    <footer>
+      <!-- {% if site.github.is_project_page %}
+      <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
+      {% endif %} -->
+      <!-- <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small>
+      </p> -->
+    </footer>
+  </div>
+  <script src="/assets/js/scale.fix.js""></script>
+
+
+  
+</body>
+
+</html>
