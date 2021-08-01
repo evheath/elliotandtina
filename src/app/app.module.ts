@@ -13,6 +13,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+
 const firebaseConfig = {
   apiKey: "AIzaSyA05ANqcrmkv-zGgo35y-mGyEwM42UkPlM",
   authDomain: "elliotandtina.firebaseapp.com",
@@ -35,7 +37,8 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
-    AngularFireStorageModule // storage
+    AngularFireStorageModule, // storage
+    IvyCarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

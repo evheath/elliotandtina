@@ -1,19 +1,63 @@
 <div>
   <h1 id="the-venue">The venue</h1>
 
-  <img [src]="'venue/bridge1.JPG' |getDownloadURL">
-
   <p>The wedding is taking place on 66-acre plot of private property in Mauston, Wisconsin. Affectionately known as
-    ‘Hamm Land’ the property has passed through generations of Hamms who have taken care of the land by planting trees,
-    maintaining trails, and–most notably–digging an artificial lake. </p>
+    ‘Hamm Land’</p>
 
-  <p>Common sights around the property include familes
-    of geese (with their fuzzy, little goslings), a myriad of small and large birds, and deer.</p>
+  <!-- venue carousel -->
+  <carousel cellWidth="100%" dots="true" overflowCellsLimit="1" lightDOM="true" [images]="[
+  {path: 'venue/venue1.JPG'|getDownloadURL},
+  {path: 'venue/venue2.JPG'|getDownloadURL},
+  {path: 'venue/venue3.JPG'|getDownloadURL},
+  {path: 'venue/venue4.JPG'|getDownloadURL},
+  {path: 'venue/venue6.JPG'|getDownloadURL},
+  {path: 'venue/venue7.JPG'|getDownloadURL},
+  {path: 'venue/venue8.JPG'|getDownloadURL},
+  {path: 'venue/venue9.JPG'|getDownloadURL},
+  {path: 'venue/venue10.JPG'|getDownloadURL},
+  {path: 'venue/venue11.JPG'|getDownloadURL},
+]">
+  </carousel>
+
+  <p>The property has passed through generations of Hamms who have taken care of the land by planting trees,
+    maintaining trails, and–most notably–digging an artificial lake. Common sights around the property include familes
+    of geese (with their fuzzy, little goslings), a myriad of birds (from hummingbirds to hella turkies), and deer.</p>
+
+  <!-- lake carousel -->
+  <carousel cellWidth="100%" dots="true" overflowCellsLimit="1" lightDOM="true" [images]="[
+  {path: 'venue/lake1.JPG'|getDownloadURL},
+  {path: 'venue/lake2.JPG'|getDownloadURL},
+  {path: 'venue/lake3.JPG'|getDownloadURL},
+  {path: 'venue/lake4.JPG'|getDownloadURL},
+  {path: 'venue/lake5.JPG'|getDownloadURL},
+  {path: 'venue/lake7.JPG'|getDownloadURL},
+  {path: 'venue/lake8.JPG'|getDownloadURL},
+  {path: 'venue/lake9.JPG'|getDownloadURL},
+  {path: 'venue/island1.JPG'|getDownloadURL},
+  {path: 'venue/island2.JPG'|getDownloadURL},
+  {path: 'venue/island3.JPG'|getDownloadURL},
+  {path: 'venue/raft1.JPG'|getDownloadURL},
+  {path: 'venue/raft2.JPG'|getDownloadURL},
+]">
+  </carousel>
 
   <p>The manmade lake makes connections with the Wisconsin River, has several small islands, and is home to several
-    types of
-    fish. My favorite thing about the lake is the anchored raft floating in the middle-makes for a good diving and
+    types of fish. The typical holiday weekend for the Hamms involve inner-tubing, kayaking, and fishing. My favorite
+    thing about the lake is the anchored raft floating in the middle-makes for a good diving
+    and
     sunbathing platform!</p>
+
+  <!-- camp carousel -->
+  <carousel cellWidth="100%" dots="true" overflowCellsLimit="1" lightDOM="true" [images]="[
+  {path: 'venue/camp1.JPG'|getDownloadURL},
+  {path: 'venue/camp2.JPG'|getDownloadURL},
+  {path: 'venue/camp3.JPG'|getDownloadURL},
+  {path: 'venue/campwater1.JPG'|getDownloadURL},
+  {path: 'venue/campwater2.JPG'|getDownloadURL},
+  {path: 'venue/campwater3.JPG'|getDownloadURL},
+  {path: 'venue/campwater4.JPG'|getDownloadURL},
+]">
+  </carousel>
 
   <p>Tina's parents maintain a small campsite for their friends and family. It's a good place to drink, roast
     marshmellows, play lawn games, and go for a swim. If you'd like to stay on the campgrounds for the wedding, please
