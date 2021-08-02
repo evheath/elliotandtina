@@ -6,7 +6,8 @@ import { VenuePageComponent } from './venue-page/venue-page.component';
 
 
 const routes: Routes = [
-  { path: '', component: FaqPageComponent },
+  { path: '', redirectTo: '/faq', pathMatch: 'full' },
+  { path: 'faq', component: FaqPageComponent },
   { path: 'lodging', component: LodgingPageComponent },
   { path: 'venue', component: VenuePageComponent },
 ];
