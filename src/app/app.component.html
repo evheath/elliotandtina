@@ -1,32 +1,35 @@
 <div class="wrapper">
   <header>
 
-    <ul class="downloads">
-      <li><a routerLink="/">Info and<strong>FAQ</strong></a></li>
-      <li><a routerLink="/lodging">Hotels and <strong>Lodging</strong></a></li>
-      <li><a routerLink="/venue">About the <strong>Venue</strong></a></li>
-    </ul>
+    <!-- <ul class="downloads">
+      <li><a routerLink="/faq" fragment="content">Info and<strong>FAQ</strong></a></li>
+      <li><a routerLink="/lodging" fragment="content">Hotels and <strong>Lodging</strong></a></li>
+      <li><a routerLink="/venue" fragment="content">About the <strong>Venue</strong></a></li>
+    </ul> -->
 
     <h2>We're getting married!</h2>
 
     <img src="/assets/img/us.jpg" alt="Logo" />
 
-    <ul class="downloads">
+    <!-- <ul class="downloads">
       <li><a href="https://goo.gl/maps/GiBVsga2FhPUyfJP9" target="_blank">Google Maps <strong><i
               class='fa fa-map-marker'></i>
             Directions</strong></a>
       </li>
       <li><a routerLink="/upload">Upload<strong>Pictures</strong></a></li>
       <li><a routerLink="/rsvp">Coming?<strong>RSVP</strong></a></li>
-    </ul>
+    </ul> -->
 
 
   </header>
   <section>
 
-    <router-outlet></router-outlet>
+    <router-outlet id="content"></router-outlet>
   </section>
   <footer>
     <!-- <p>footer text</p> -->
+    <p>
+      <a routerLink="/faq" fragment="content">FAQ</a> / <a routerLink="/venue" fragment="content">Venue</a>
+    </p>
   </footer>
 </div>
