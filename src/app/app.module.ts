@@ -15,6 +15,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { RsvpPageComponent } from './rsvp-page/rsvp-page.component';
+import { GoogleSigninDirective } from './google-signin.directive';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA05ANqcrmkv-zGgo35y-mGyEwM42UkPlM",
@@ -31,7 +32,8 @@ const firebaseConfig = {
     FaqPageComponent,
     LodgingPageComponent,
     VenuePageComponent,
-    RsvpPageComponent
+    RsvpPageComponent,
+    GoogleSigninDirective
   ],
   imports: [
     BrowserModule,
