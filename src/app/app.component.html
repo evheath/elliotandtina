@@ -32,7 +32,7 @@
       <a routerLink="/faq" fragment="content">FAQ</a> /
       <a routerLink="/venue" fragment="content">Venue</a> /
       <a routerLink="/rsvp" fragment="content">RSVP</a> /
-      <a routerLink="/auth" fragment="content">Login</a>
+      <a routerLink="/auth" fragment="content">{{(afAuth.authState | async) ? 'Logout' : 'Login'}}</a>
     </p>
   </footer>
 </div>
