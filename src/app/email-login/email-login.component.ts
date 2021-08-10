@@ -5,6 +5,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { SnackbarService } from '../snackbar.service';
 
 @Component({
   selector: 'app-email-login',
@@ -19,7 +20,7 @@ export class EmailLoginComponent implements OnInit {
 
   serverMessage: string;
 
-  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder) { }
+  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder, private snack: SnackbarService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -76,13 +77,16 @@ export class EmailLoginComponent implements OnInit {
     try {
       if (this.isLogin) {
         await this.afAuth.signInWithEmailAndPassword(email, password);
+        this.snack.simple("Login successful!")
       }
       if (this.isSignup) {
         await this.afAuth.createUserWithEmailAndPassword(email, password);
+        this.snack.simple("Account created!")
       }
       if (this.isPasswordReset) {
         await this.afAuth.sendPasswordResetEmail(email);
         this.serverMessage = 'Check your email';
+        this.snack.simple("Email sent, check your email")
       }
     } catch (err) {
       this.serverMessage = err;
