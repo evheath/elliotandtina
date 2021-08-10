@@ -16,6 +16,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { RsvpPageComponent } from './rsvp-page/rsvp-page.component';
 import { GoogleSigninDirective } from './google-signin.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatButtonModule } from '@angular/material/button'
 
 const firebaseConfig = {
   apiKey: "AIzaSyA05ANqcrmkv-zGgo35y-mGyEwM42UkPlM",
@@ -43,6 +46,8 @@ const firebaseConfig = {
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     IvyCarouselModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
