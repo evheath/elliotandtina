@@ -11,16 +11,26 @@ import { RsvpDataModel } from './rsvp.model';
 })
 export class RsvpPageComponent implements OnInit {
   public rsvpData: RsvpDataModel;
-  private rsvpRef: AngularFirestoreDocument<RsvpDataModel>
 
   constructor(private db: AngularFirestore, private auth: AngularFireAuth) { }
 
 
   public async writeRsvp() {
     const user = await this.auth.currentUser;
-    this.rsvpRef = this.db.doc<RsvpDataModel>(`rsvp/${user.uid}`)
+    const rsvpRef = this.db.doc<RsvpDataModel>(`rsvp/${user.uid}`)
     this.rsvpData.uid = user.uid
-    await this.rsvpRef.set(this.rsvpData, { merge: true })
+    this.rsvpData.email = user.email
+    this.rsvpData.phoneNumber = user.phoneNumber
+    await rsvpRef.set(this.rsvpData, { merge: true })
+  }
+
+  private getExistingRsvp() {
+    this.auth.currentUser.then(user => {
+      const rsvpDoc = this.db.doc<RsvpDataModel>(`rsvp/${user.uid}`)
+      rsvpDoc.get().toPromise().then(snap => {
+        this.rsvpData = snap.data()
+      })
+    })
   }
 
   ngOnInit() {
@@ -31,6 +41,8 @@ export class RsvpPageComponent implements OnInit {
       attending: false,
       comment: "",
     }
+
+    this.getExistingRsvp()
   }
 
 

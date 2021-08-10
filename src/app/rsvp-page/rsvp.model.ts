@@ -4,4 +4,7 @@ export interface RsvpDataModel {
   comment: string;
   attending: boolean;
   attendees: number;
+  phoneNumber?: string;
+  email?: string;
+  authorized?: boolean;
 }
