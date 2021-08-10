@@ -25,7 +25,8 @@ import { EmailLoginComponent } from './email-login/email-login.component';
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
+import { RsvpPageComponent } from './rsvp-page/rsvp-page.component'
 
 const firebaseConfig = {
   apiKey: "AIzaSyA05ANqcrmkv-zGgo35y-mGyEwM42UkPlM",
@@ -44,7 +45,8 @@ const firebaseConfig = {
     VenuePageComponent,
     AuthPageComponent,
     GoogleSigninDirective,
-    EmailLoginComponent
+    EmailLoginComponent,
+    RsvpPageComponent
   ],
   imports: [
     BrowserModule,
