@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
-  selector: 'app-rsvp-page',
-  templateUrl: './rsvp-page.component.html',
-  styleUrls: ['./rsvp-page.component.scss']
+  selector: 'app-auth-page',
+  templateUrl: './auth-page.component.html',
+  styleUrls: ['./auth-page.component.scss']
 })
-export class RsvpPageComponent implements OnInit {
+export class AuthPageComponent implements OnInit {
 
   constructor(public afAuth: AngularFireAuth) { }
 
