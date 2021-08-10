@@ -31,7 +31,9 @@
     <mat-label>Questions/Comments</mat-label>
     <textarea matInput [(ngModel)]="rsvpData.comment"></textarea>
   </mat-form-field>
+
+  <mat-card-actions align="end">
+    <button mat-flat-button color="primary" (click)="writeRsvp()">Save</button>
+  </mat-card-actions>
+
 </mat-card>
-
-
-<button (click)="writeRsvp()">Create Rsvp</button>
