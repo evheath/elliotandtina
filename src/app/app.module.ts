@@ -18,7 +18,14 @@ import { RsvpPageComponent } from './rsvp-page/rsvp-page.component';
 import { GoogleSigninDirective } from './google-signin.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { EmailLoginComponent } from './email-login/email-login.component';
+
 import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material/card'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input'
 
 const firebaseConfig = {
   apiKey: "AIzaSyA05ANqcrmkv-zGgo35y-mGyEwM42UkPlM",
@@ -36,7 +43,8 @@ const firebaseConfig = {
     LodgingPageComponent,
     VenuePageComponent,
     RsvpPageComponent,
-    GoogleSigninDirective
+    GoogleSigninDirective,
+    EmailLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +56,10 @@ const firebaseConfig = {
     IvyCarouselModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
