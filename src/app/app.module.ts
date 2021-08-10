@@ -14,7 +14,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { IvyCarouselModule } from 'angular-responsive-carousel';
-import { RsvpComponent } from './rsvp/rsvp.component';
+import { RsvpPageComponent } from './rsvp-page/rsvp-page.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA05ANqcrmkv-zGgo35y-mGyEwM42UkPlM",
@@ -31,7 +31,7 @@ const firebaseConfig = {
     FaqPageComponent,
     LodgingPageComponent,
     VenuePageComponent,
-    RsvpComponent
+    RsvpPageComponent
   ],
   imports: [
     BrowserModule,
