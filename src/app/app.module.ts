@@ -30,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 // import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 const firebaseConfig = {
@@ -70,6 +71,7 @@ const firebaseConfig = {
     FormsModule,
     MatRadioModule,
     MatDividerModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

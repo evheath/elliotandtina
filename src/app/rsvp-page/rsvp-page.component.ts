@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { SnackbarService } from '../snackbar.service';
 import { RsvpDataModel } from './rsvp.model';
 
 
@@ -12,7 +13,7 @@ import { RsvpDataModel } from './rsvp.model';
 export class RsvpPageComponent implements OnInit {
   public rsvpData: RsvpDataModel;
 
-  constructor(private db: AngularFirestore, private auth: AngularFireAuth) { }
+  constructor(private db: AngularFirestore, private auth: AngularFireAuth, private snack: SnackbarService) { }
 
 
   public async writeRsvp() {
@@ -22,6 +23,8 @@ export class RsvpPageComponent implements OnInit {
     this.rsvpData.email = user.email
     this.rsvpData.phoneNumber = user.phoneNumber
     await rsvpRef.set(this.rsvpData, { merge: true })
+    this.snack.simple("RSVP updated");
+
   }
 
   private getExistingRsvp() {
