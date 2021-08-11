@@ -33,8 +33,12 @@ export class RsvpPageComponent implements OnInit {
     this.rsvpData.uid = user.uid
     this.rsvpData.email = user.email
     this.rsvpData.phoneNumber = user.phoneNumber
-    await rsvpRef.set(this.rsvpData, { merge: true })
-    this.snack.simple("RSVP updated");
+    await rsvpRef.set(this.rsvpData, { merge: true }).then(success => {
+      this.snack.simple("RSVP updated");
+    }).catch(e => {
+      this.snack.simple("Problem updating RSVP");
+      console.error(e)
+    })
 
   }
 
