@@ -2,9 +2,10 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="rsvpData.name">
+    <input #inputName="ngModel" matInput [(ngModel)]="rsvpData.name">
   </mat-form-field>
-  <mat-radio-group [(ngModel)]="rsvpData.attending">
+
+  <mat-radio-group #inputAttending="ngModel" [(ngModel)]="rsvpData.attending">
     <div>
       <mat-radio-button [value]='true'>I am planning on attending</mat-radio-button>
 
@@ -20,7 +21,7 @@
     <p>How many people are coming? (Including yourself) </p>
     <mat-form-field appearance="fill">
       <mat-label>Attendees</mat-label>
-      <input matInput type="number" min="0" max="12" [(ngModel)]="rsvpData.attendees">
+      <input #inputAttendees="ngModel" matInput type="number" min="0" max="12" [(ngModel)]="rsvpData.attendees">
     </mat-form-field>
     <mat-divider></mat-divider>
 
@@ -29,7 +30,7 @@
   <p>Is there anything we should know or that you wanted to say?</p>
   <mat-form-field appearance="fill">
     <mat-label>Questions/Comments</mat-label>
-    <textarea matInput [(ngModel)]="rsvpData.comment"></textarea>
+    <textarea #inputComment="ngModel" matInput [(ngModel)]="rsvpData.comment"></textarea>
   </mat-form-field>
 
   <mat-card-actions align="end">

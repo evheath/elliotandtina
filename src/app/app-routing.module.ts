@@ -6,6 +6,7 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
 import { VenuePageComponent } from './venue-page/venue-page.component';
 import { RsvpPageComponent } from './rsvp-page/rsvp-page.component';
 import { AuthGuard } from './auth.guard';
+import { UnsavedGuard } from './unsaved.guard';
 
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: 'lodging', component: LodgingPageComponent },
   { path: 'venue', component: VenuePageComponent },
   { path: 'auth', component: AuthPageComponent },
-  { path: 'rsvp', component: RsvpPageComponent, canActivate: [AuthGuard] },
+  { path: 'rsvp', component: RsvpPageComponent, canActivate: [AuthGuard], canDeactivate: [UnsavedGuard] },
 
 ];
 
