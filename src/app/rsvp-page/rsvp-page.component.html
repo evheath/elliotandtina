@@ -1,38 +1,45 @@
-<mat-card [formGroup]="rsvpForm">
+<form [formGroup]="rsvpForm" (ngSubmit)="writeRsvp()">
 
-  <mat-form-field appearance="fill">
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="name">
-  </mat-form-field>
+  <mat-card>
 
-  <mat-radio-group formControlName="attending">
-    <div>
-      <mat-radio-button [value]='true'>I am planning on attending</mat-radio-button>
-    </div>
-    <div>
-      <mat-radio-button [value]='false'>I am not planning on attending</mat-radio-button>
-    </div>
-  </mat-radio-group>
-
-  <div *ngIf="rsvpForm.value.attending">
-    <mat-divider style="margin-top: 1em;"></mat-divider>
-    <p>How many people are coming? (Including yourself) </p>
     <mat-form-field appearance="fill">
-      <mat-label>Attendees</mat-label>
-      <input formControlName="attendees" matInput type="number" min="0" max="12">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" placeholder="Lance Schmuckatelli">
+      <mat-error *ngIf="rsvpForm.controls['name'].invalid">Name is required</mat-error>
     </mat-form-field>
-    <mat-divider></mat-divider>
 
-  </div>
+    <mat-radio-group formControlName="attending">
+      <div>
+        <mat-radio-button [value]='true'>I am planning on attending</mat-radio-button>
+      </div>
+      <div>
+        <mat-radio-button [value]='false'>I am not planning on attending</mat-radio-button>
+      </div>
+    </mat-radio-group>
 
-  <p>Is there anything we should know or that you wanted to say?</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Questions/Comments</mat-label>
-    <textarea formControlName="comment" matInput></textarea>
-  </mat-form-field>
+    <div *ngIf="rsvpForm.value.attending">
+      <mat-divider style="margin-top: 1em;"></mat-divider>
+      <p>How many people are coming? (Including yourself) </p>
+      <mat-form-field appearance="fill">
+        <mat-label>Attendees</mat-label>
+        <input formControlName="attendees" matInput type="number">
+        <mat-error *ngIf="rsvpForm.controls['attendees'].invalid">Must be between 0 and 12</mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
 
-  <mat-card-actions align="end">
-    <button mat-flat-button color="primary" (click)="writeRsvp()">Save</button>
-  </mat-card-actions>
+    </div>
 
-</mat-card>
+    <p>Is there anything we should know or that you wanted to say?</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Questions/Comments</mat-label>
+      <textarea formControlName="comment" matInput></textarea>
+    </mat-form-field>
+
+
+    <mat-card-actions align="end">
+      <button mat-flat-button [color]="hasUnsavedData() ? 'primary' : ''" [disabled]="!hasUnsavedData()"
+        type="submit">Save</button>
+    </mat-card-actions>
+
+  </mat-card>
+</form>
