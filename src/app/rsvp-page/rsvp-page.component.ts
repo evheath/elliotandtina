@@ -17,6 +17,17 @@ export class RsvpPageComponent implements OnInit {
 
 
   public async writeRsvp() {
+    if (this.rsvpData.attendees < 0) {
+      this.snack.simple("No negative numbers haha");
+      this.rsvpData.attendees = 1
+      return;
+    }
+    if (this.rsvpData.attendees > 12) {
+      this.snack.simple("Keep it under 12 please");
+      this.rsvpData.attendees = 1
+      return;
+    }
+
     const user = await this.auth.currentUser;
     const rsvpRef = this.db.doc<RsvpDataModel>(`rsvp/${user.uid}`)
     this.rsvpData.uid = user.uid
