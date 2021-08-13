@@ -48,7 +48,7 @@ export const onRsvpDocumentUpdate = functions.firestore.document(`rsvp/{rsvpId}`
     return null;
   }
 
-  // there was a meaningful change, so we can start getting/setting data
+  // there was a meaningful change, so we can start getting and setting data
   const aggRef = db.doc('aggregations/rsvp');
   const aggDoc = await aggRef.get();
   const aggData = aggDoc.data();
