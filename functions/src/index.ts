@@ -1,4 +1,4 @@
 export {
-  // onRsvpDocumentUpdate,
+  onRsvpDocumentUpdate,
   onRsvpDocumentCreation,
 } from './firestore';
