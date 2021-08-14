@@ -27,10 +27,10 @@
     <router-outlet id="content"></router-outlet>
   </section>
   <footer>
-    <!-- <p>footer text</p> -->
     <p>
       <a routerLink="/faq" fragment="content">FAQ</a> /
       <a routerLink="/venue" fragment="content">Venue</a> /
+      <a routerLink="/lodging" fragment="content">Lodging</a> /
       <a routerLink="/rsvp" fragment="content">RSVP</a> /
       <a routerLink="/auth" fragment="content">{{(afAuth.authState | async) ? 'Logout' : 'Login'}}</a>
     </p>
