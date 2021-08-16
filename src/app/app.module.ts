@@ -32,6 +32,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PhotosPageComponent } from './photos-page/photos-page.component';
+import { DropzoneDirective } from './dropzone.directive';
 
 
 const firebaseConfig = {
@@ -53,7 +54,8 @@ const firebaseConfig = {
     GoogleSigninDirective,
     EmailLoginComponent,
     RsvpPageComponent,
-    PhotosPageComponent
+    PhotosPageComponent,
+    DropzoneDirective
   ],
   imports: [
     BrowserModule,
