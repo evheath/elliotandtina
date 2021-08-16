@@ -31,6 +31,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PhotosPageComponent } from './photos-page/photos-page.component';
 
 
 const firebaseConfig = {
@@ -51,7 +52,8 @@ const firebaseConfig = {
     AuthPageComponent,
     GoogleSigninDirective,
     EmailLoginComponent,
-    RsvpPageComponent
+    RsvpPageComponent,
+    PhotosPageComponent
   ],
   imports: [
     BrowserModule,
