@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'venue', component: VenuePageComponent },
   { path: 'auth', component: AuthPageComponent },
   { path: 'rsvp', component: RsvpPageComponent, canActivate: [AuthGuard], canDeactivate: [UnsavedGuard] },
+  { path: '**', redirectTo: '/faq' }
 
 ];
 
