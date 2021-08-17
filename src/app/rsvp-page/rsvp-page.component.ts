@@ -46,7 +46,7 @@ export class RsvpPageComponent implements OnInit {
     rsvpRef.set({
       ...this.rsvpForm.value,
       'uid': user.uid,
-    }).then(success => {
+    }, { merge: true }).then(success => {
       this.snack.simple("RSVP updated");
       this.rsvpForm.markAsPristine()
     }).catch(e => {
