@@ -33,8 +33,8 @@
 <mat-card *ngFor="let upload of $uploads | async" class="upload-card">
   <mat-card-header>
     <!-- <div mat-card-avatar class="example-header-image"></div> -->
-    <mat-card-title>name</mat-card-title>
-    <mat-card-subtitle>timestamp</mat-card-subtitle>
+    <mat-card-title>Uploaded by {{upload.name}}</mat-card-title>
+    <mat-card-subtitle>{{upload.timestamp | date}}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image [src]="upload.downloadURL">
   <!-- <mat-card-content>
