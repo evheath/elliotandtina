@@ -19,7 +19,7 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
   public isHovering: boolean;
   public files: File[] = [];
   public doingWork: boolean;
-  public $uploads: BehaviorSubject<UploadDataModel[]> = new BehaviorSubject([]);
+  public uploads$: BehaviorSubject<UploadDataModel[]> = new BehaviorSubject([]);
 
 
   constructor(
@@ -97,7 +97,7 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
     // get the uploads
     this.subs.add(this.db.collection<UploadDataModel>("uploads").valueChanges()
       .subscribe(docs => {
-        this.$uploads.next(docs)
+        this.uploads$.next(docs)
       })
     )
 

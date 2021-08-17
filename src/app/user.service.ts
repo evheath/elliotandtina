@@ -12,22 +12,24 @@ export class UserService {
 
   public name: string;
   public uid: string;
-  public $isApproved: BehaviorSubject<boolean> = new BehaviorSubject(false)
-  public $isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public isApproved$: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public isAuthenticated$: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public rsvp$: BehaviorSubject<RsvpDataModel> = new BehaviorSubject(null)
 
   constructor(
     private db: AngularFirestore,
     private auth: AngularFireAuth
   ) {
-    // determine if user is approved to upload pictures
     this.auth.authState.subscribe(user => {
       if (user) {
         this.uid = user.uid
-        this.$isAuthenticated.next(true)
+        this.isAuthenticated$.next(true)
+
 
         const rsvpRef = this.db.doc<RsvpDataModel>(`rsvp/${user.uid}`)
         rsvpRef.valueChanges().subscribe(rsvp => {
-          this.$isApproved.next(rsvp.approved)
+          this.rsvp$.next(rsvp)
+          this.isApproved$.next(rsvp.approved)
           this.name = rsvp.name
         });
       }
