@@ -1,9 +1,10 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+// import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { RsvpDataModel } from '../rsvp-page/rsvp.model';
+// import { RsvpDataModel } from '../rsvp-page/rsvp.model';
+import { UserService } from '../user.service';
 import { UploadDataModel } from './upload.model';
 
 @Component({
@@ -14,18 +15,18 @@ import { UploadDataModel } from './upload.model';
 export class PhotosPageComponent implements OnInit, OnDestroy {
 
 
-  subs = new Subscription();
-  isHovering: boolean;
-  files: File[] = [];
-  doingWork: boolean;
-  public $userIsApproved: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  private subs = new Subscription();
+  public isHovering: boolean;
+  public files: File[] = [];
+  public doingWork: boolean;
   public $uploads: BehaviorSubject<UploadDataModel[]> = new BehaviorSubject([]);
 
 
   constructor(
     public storage: AngularFireStorage,
     public db: AngularFirestore,
-    private auth: AngularFireAuth,
+    // private auth: AngularFireAuth,
+    public user: UserService
   ) { }
 
   // needed for canDeactivate
@@ -58,16 +59,27 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
 
     this.files.forEach(file => {
       // The storage path
-      const path = `uploads/${Date.now()}_${file.name}`;
+      const timestamp = Date.now()
+      const path = `uploads/${timestamp}_${file.name}`;
 
       // Reference to storage bucket
       const ref = this.storage.ref(path);
+
+
 
       // The main task
       this.storage.upload(path, file).then(async () => {
         const downloadURL = await ref.getDownloadURL().toPromise();
 
-        await this.db.collection('uploads').add({ downloadURL, path });
+        let newUpload: UploadDataModel = {
+          path,
+          downloadURL,
+          likers: [],
+          uid: this.user.uid,
+          name: this.user.name,
+          timestamp,
+        }
+        await this.db.collection('uploads').add(newUpload);
       });
 
     });
@@ -82,24 +94,18 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.doingWork = false;
 
-    // determine if user is approved to upload pictures
-    this.subs.add(this.auth.authState.subscribe(user => {
-      if (user) {
-        const rsvpRef = this.db.doc<RsvpDataModel>(`rsvp/${user.uid}`)
-        this.subs.add(rsvpRef.snapshotChanges().subscribe(rsvp => {
-          this.$userIsApproved.next(rsvp.payload.data().approved)
-        }));
-      }
-    }));
-
     // get the uploads
-    this.subs.add(this.db.collection<UploadDataModel>("uploads").valueChanges().subscribe(docs => {
-      this.$uploads.next(docs)
-    })
+    this.subs.add(this.db.collection<UploadDataModel>("uploads").valueChanges()
+      .subscribe(docs => {
+        this.$uploads.next(docs)
+      })
     )
 
   }
   ngOnDestroy() {
     this.subs.unsubscribe();
+
+    // use for dates
+    // qualifiedDate = new DatePipe("en-US").transform(qualifiedDate.toDate(), "dd-MMM-yyyy");
   }
 }

@@ -4,4 +4,5 @@ export interface UploadDataModel {
   downloadURL: string;
   path: string;
   likers: string[];
+  timestamp: number;
 }

@@ -1,4 +1,4 @@
-<div *ngIf="$userIsApproved | async" class="dropzone" dropzone (hovered)="toggleHover($event)"
+<div *ngIf="user.$isApproved | async" class="dropzone" dropzone (hovered)="toggleHover($event)"
   (dropped)="onDrop($event)" [class.hovering]="isHovering">
 
 
