@@ -3,8 +3,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SnackbarService } from '../snackbar.service';
+import { UserService } from '../user.service';
 import { RsvpDataModel } from './rsvp.model';
 
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rsvp-page',
@@ -19,6 +21,7 @@ export class RsvpPageComponent implements OnInit {
     private auth: AngularFireAuth,
     private snack: SnackbarService,
     private fb: FormBuilder,
+    private user: UserService,
   ) { }
 
   // needed for canDeactivate
@@ -57,12 +60,12 @@ export class RsvpPageComponent implements OnInit {
   }
 
   private patchExistingRsvp() {
-    this.auth.currentUser.then(user => {
-      const rsvpDoc = this.db.doc<RsvpDataModel>(`rsvp/${user.uid}`)
-      rsvpDoc.get().toPromise().then(snapshot => {
-        this.rsvpForm.patchValue(snapshot.data())
-      }).catch(e => { }) // catches document not existing
-    })
+    this.user.rsvp$.pipe(
+      take(1)
+    ).toPromise().then(rsvp => {
+      this.rsvpForm.patchValue(rsvp)
+    });
+
   }
 
   private buildForm() {
