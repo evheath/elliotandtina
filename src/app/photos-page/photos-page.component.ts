@@ -2,9 +2,9 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable, of, BehaviorSubject, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { RsvpDataModel } from '../rsvp-page/rsvp.model';
+import { UploadDataModel } from './upload.model';
 
 @Component({
   selector: 'app-photos-page',
@@ -16,12 +16,10 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
 
   subs = new Subscription();
   isHovering: boolean;
-
   files: File[] = [];
-
   doingWork: boolean;
-
-  public $userIsApproved: BehaviorSubject<boolean>
+  public $userIsApproved: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  public $uploads: BehaviorSubject<UploadDataModel[]> = new BehaviorSubject([]);
 
 
   constructor(
@@ -80,30 +78,11 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
   }
 
 
-  // public async userIsApproved(): Promise<boolean> {
-  //   const user = await this.auth.currentUser;
-  //   console.log('got user')
-  //   const { uid } = user
-  //   console.log('got uid')
-  //   const snap = await this.db.doc(`rsvp/${uid}`).get().toPromise()
-  //   console.log('got snap')
-  //   if (snap.exists) {
-  //     // const {approved} = snap.data()
-  //     // return snap.data().approved
-  //     const data = snap.data()
-  //     console.log(data)
-
-  //   }
-
-  //   return false
-  // }
-
 
   ngOnInit(): void {
     this.doingWork = false;
 
     // determine if user is approved to upload pictures
-    this.$userIsApproved = new BehaviorSubject(false)
     this.subs.add(this.auth.authState.subscribe(user => {
       if (user) {
         const rsvpRef = this.db.doc<RsvpDataModel>(`rsvp/${user.uid}`)
@@ -112,6 +91,12 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
         }));
       }
     }));
+
+    // get the uploads
+    this.subs.add(this.db.collection<UploadDataModel>("uploads").valueChanges().subscribe(docs => {
+      this.$uploads.next(docs)
+    })
+    )
 
   }
   ngOnDestroy() {
