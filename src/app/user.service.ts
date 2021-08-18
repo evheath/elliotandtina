@@ -33,6 +33,8 @@ export class UserService {
               shareReplay(),
             )
         } else {
+          this.name = '';
+          this.uid = '';
           return of(null);
         }
       })

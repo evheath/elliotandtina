@@ -31,11 +31,12 @@
 </div>
 
 <ng-template #needApproval>
-  <p *ngIf="(user.rsvp$ | async); else needRSVP"> To be able to upload pictures, your account must be approved. Please
-    contact Elliot.</p>
+  <p *ngIf="(user.rsvp$ | async); else needRSVP"> To be able to upload pictures your account must be approved manually.
+    Please
+    contact me.</p>
   <ng-template #needRSVP>
     <p></p>
-    <p>To be able to upload pictures, you must RSVP.</p>
+    <p>To be able to upload pictures you must RSVP.</p>
   </ng-template>
 </ng-template>
 
