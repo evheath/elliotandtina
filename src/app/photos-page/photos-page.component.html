@@ -1,4 +1,4 @@
-<div *ngIf="user.isApproved$ | async" class="dropzone" dropzone (hovered)="toggleHover($event)"
+<div *ngIf="(user.rsvp$ | async)?.approved; else needApproval" class="dropzone" dropzone (hovered)="toggleHover($event)"
   (dropped)="onDrop($event)" [class.hovering]="isHovering">
 
 
@@ -29,6 +29,16 @@
     </label>
   </div>
 </div>
+
+<ng-template #needApproval>
+  <p *ngIf="(user.rsvp$ | async); else needRSVP"> To be able to upload pictures, your account must be approved. Please
+    contact Elliot.</p>
+  <ng-template #needRSVP>
+    <p></p>
+    <p>To be able to upload pictures, you must RSVP.</p>
+  </ng-template>
+</ng-template>
+
 
 <mat-card *ngFor="let upload of uploads$ | async" class="upload-card">
   <mat-card-header>
