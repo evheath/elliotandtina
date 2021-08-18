@@ -1,9 +1,8 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-// import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { BehaviorSubject, Subscription } from 'rxjs';
-// import { RsvpDataModel } from '../rsvp-page/rsvp.model';
+import { SnackbarService } from '../snackbar.service';
 import { UserService } from '../user.service';
 import { UploadDataModel } from './upload.model';
 
@@ -26,7 +25,8 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
     public storage: AngularFireStorage,
     public db: AngularFirestore,
     // private auth: AngularFireAuth,
-    public user: UserService
+    public user: UserService,
+    private snack: SnackbarService
   ) { }
 
   // needed for canDeactivate
@@ -54,7 +54,7 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
     this.startUpload()
   }
 
-  async startUpload() {
+  public async startUpload() {
     this.doingWork = true;
 
     this.files.forEach(file => {
@@ -79,7 +79,7 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
           name: this.user.name,
           timestamp,
         }
-        await this.db.collection('uploads').add(newUpload);
+        await this.db.doc<UploadDataModel>(path).set(newUpload)
       });
 
     });
@@ -87,6 +87,22 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
     // clear the files array
     this.files.splice(0);
     this.doingWork = false;
+  }
+
+
+  public isOwner(upload: UploadDataModel) {
+    return upload.uid === this.user.uid
+  }
+
+  public async deleteUpload(upload: UploadDataModel) {
+    try {
+      // the deletion of the actual image happens via firebase functions
+      await this.db.doc(upload.path).delete()
+      this.snack.simple("Upload deleted")
+    } catch (e) {
+      console.error(e)
+      this.snack.simple("Problem deleting upload")
+    }
   }
 
 
