@@ -111,7 +111,7 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
     this.doingWork = false;
 
     // get the uploads
-    this.subs.add(this.db.collection<UploadDataModel>("uploads").valueChanges()
+    this.subs.add(this.db.collection<UploadDataModel>("uploads", ref => ref.orderBy('timestamp', 'desc')).valueChanges()
       .subscribe(docs => {
         this.uploads$.next(docs)
       })
