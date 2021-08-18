@@ -5,4 +5,5 @@ export interface UploadDataModel {
   path: string;
   likers: string[];
   timestamp: number;
+  comment?: string;
 }
