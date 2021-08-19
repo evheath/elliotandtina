@@ -41,6 +41,11 @@
 </ng-template>
 
 
+<div class="centered" *ngIf="this.doingWork;">
+  <mat-spinner></mat-spinner>
+</div>
+
+
 <mat-card *ngFor="let upload of ups.data | async" class="centered">
   <mat-card-header>
     <!-- <div mat-card-avatar class="example-header-image"></div> -->
@@ -58,8 +63,8 @@
   </mat-card-actions>
 </mat-card>
 
-<div class="centered">
-  <mat-spinner *ngIf="ups.loading|async"></mat-spinner>
+<div class="centered" *ngIf="ups.loading|async">
+  <mat-spinner></mat-spinner>
 </div>
 
 
@@ -68,5 +73,5 @@
 </div>
 
 <ng-template #noMoreUploads>
-  <p>You've reached the end!</p>
+  <p style="margin-top: 1em;">You've reached the end!</p>
 </ng-template>

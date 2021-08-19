@@ -33,7 +33,6 @@ export class UploadService {
 
 
   constructor(private afs: AngularFirestore) {
-    this.initUploads();
   }
 
   initUploads() {

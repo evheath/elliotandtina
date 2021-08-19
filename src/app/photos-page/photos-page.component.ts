@@ -103,7 +103,7 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.doingWork = false;
-
+    this.ups.initUploads();
   }
   ngOnDestroy(): void {
   }
