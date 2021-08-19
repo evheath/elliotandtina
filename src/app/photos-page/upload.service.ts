@@ -33,12 +33,17 @@ export class UploadService {
 
 
   constructor(private afs: AngularFirestore) {
+    this.initUploads();
+  }
 
+  initUploads() {
     this.init('uploads', 'timestamp', { reverse: true, prepend: false })
   }
 
   // Initial query sets options and defines the Observable
   init(path, field, opts?) {
+    this.reset();
+
     this.query = {
       path,
       field,
@@ -47,6 +52,7 @@ export class UploadService {
       prepend: false,
       ...opts
     }
+
 
     const first = this.afs.collection(this.query.path, ref => {
       return ref

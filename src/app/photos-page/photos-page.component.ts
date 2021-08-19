@@ -54,32 +54,29 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
   public async startUpload() {
     this.doingWork = true;
 
-    this.files.forEach(file => {
-      // The storage path
+    for (const file of this.files) {
       const timestamp = Date.now()
       const path = `uploads/${timestamp}_${file.name}`;
 
-      // Reference to storage bucket
-      const ref = this.storage.ref(path);
+      await this.storage.upload(path, file)
 
+      const storageRef = this.storage.ref(path);
+      const downloadURL = await storageRef.getDownloadURL().toPromise();
+      let newUpload: UploadDataModel = {
+        path,
+        downloadURL,
+        likers: [],
+        uid: this.user.uid,
+        name: this.user.name,
+        timestamp,
+      }
+      await this.db.doc<UploadDataModel>(path).set(newUpload)
+    }
+    this.snack.simple("File(s) uploaded!");
 
-
-      // The main task
-      this.storage.upload(path, file).then(async () => {
-        const downloadURL = await ref.getDownloadURL().toPromise();
-
-        let newUpload: UploadDataModel = {
-          path,
-          downloadURL,
-          likers: [],
-          uid: this.user.uid,
-          name: this.user.name,
-          timestamp,
-        }
-        await this.db.doc<UploadDataModel>(path).set(newUpload)
-      });
-
-    });
+    // since new data will be added to the 'top' of the collection
+    // we may as well restart the query
+    this.ups.initUploads();
 
     // clear the files array
     this.files.splice(0);
@@ -96,6 +93,7 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
       // the deletion of the actual image happens via firebase functions
       await this.db.doc(upload.path).delete()
       this.snack.simple("Upload deleted")
+      this.ups.initUploads() // need to clear out stale data, may as well restart
     } catch (e) {
       console.error(e)
       this.snack.simple("Problem deleting upload")
