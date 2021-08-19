@@ -63,6 +63,10 @@
 </div>
 
 
-<div class="centered">
+<div class="centered" *ngIf="!(ups.done|async); else noMoreUploads">
   <button mat-raised-button (click)="ups.more()">Load more</button>
 </div>
+
+<ng-template #noMoreUploads>
+  <p>You've reached the end!</p>
+</ng-template>
