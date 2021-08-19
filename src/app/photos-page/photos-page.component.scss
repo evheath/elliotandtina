@@ -26,13 +26,11 @@ progress::-webkit-progress-value {
   transition: width 0.1s ease;
 }
 
-.upload-card {
+.centered {
   margin-top: 2em;
 
   text-align: center;
 }
-
-#load-more {
-  margin-top: 2em;
-  text-align: center;
+.mat-progress-spinner{
+  display: inline-block;
 }

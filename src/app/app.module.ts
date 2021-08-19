@@ -31,6 +31,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PhotosPageComponent } from './photos-page/photos-page.component';
 import { DropzoneDirective } from './dropzone.directive';
 
@@ -76,6 +77,7 @@ const firebaseConfig = {
     MatRadioModule,
     MatDividerModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

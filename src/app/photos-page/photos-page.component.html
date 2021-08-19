@@ -41,7 +41,7 @@
 </ng-template>
 
 
-<mat-card *ngFor="let upload of ups.data | async" class="upload-card">
+<mat-card *ngFor="let upload of ups.data | async" class="centered">
   <mat-card-header>
     <!-- <div mat-card-avatar class="example-header-image"></div> -->
     <mat-card-title>Uploaded by {{upload.name}}</mat-card-title>
@@ -58,8 +58,11 @@
   </mat-card-actions>
 </mat-card>
 
+<div class="centered">
+  <mat-spinner *ngIf="ups.loading|async"></mat-spinner>
+</div>
 
-<div id="load-more">
 
+<div class="centered">
   <button mat-raised-button (click)="ups.more()">Load more</button>
 </div>
