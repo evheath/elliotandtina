@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PaginationService } from './pagination.service';
+import { UploadService } from './photos-page/upload.service';
 
 describe('PaginationService', () => {
-  let service: PaginationService;
+  let service: UploadService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PaginationService);
+    service = TestBed.inject(UploadService);
   });
 
   it('should be created', () => {

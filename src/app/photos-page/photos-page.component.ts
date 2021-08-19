@@ -1,7 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { PaginationService } from '../pagination.service';
+import { UploadService } from './upload.service';
 import { SnackbarService } from '../snackbar.service';
 import { UserService } from '../user.service';
 import { UploadDataModel } from './upload.model';
@@ -11,7 +11,7 @@ import { UploadDataModel } from './upload.model';
   templateUrl: './photos-page.component.html',
   styleUrls: ['./photos-page.component.scss']
 })
-export class PhotosPageComponent implements OnInit {
+export class PhotosPageComponent implements OnInit, OnDestroy {
   public isHovering: boolean;
   public files: File[] = [];
   public doingWork: boolean;
@@ -22,8 +22,9 @@ export class PhotosPageComponent implements OnInit {
     public db: AngularFirestore,
     public user: UserService,
     private snack: SnackbarService,
-    public page: PaginationService,
-  ) { }
+    public ups: UploadService,
+  ) {
+  }
 
   // needed for canDeactivate
   @HostListener('window:beforeunload', ['$event'])
@@ -105,7 +106,7 @@ export class PhotosPageComponent implements OnInit {
   ngOnInit(): void {
     this.doingWork = false;
 
-    this.page.init('uploads', 'timestamp', { reverse: true, prepend: false })
-
+  }
+  ngOnDestroy(): void {
   }
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { scan, take, tap } from 'rxjs/operators'
@@ -18,7 +17,7 @@ interface QueryConfig {
 @Injectable({
   providedIn: 'root'
 })
-export class PaginationService {
+export class UploadService {
 
   // Source data
   private _done = new BehaviorSubject(false);
@@ -33,7 +32,10 @@ export class PaginationService {
   loading: Observable<boolean> = this._loading.asObservable();
 
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) {
+
+    this.init('uploads', 'timestamp', { reverse: true, prepend: false })
+  }
 
   // Initial query sets options and defines the Observable
   init(path, field, opts?) {

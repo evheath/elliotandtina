@@ -41,9 +41,7 @@
 </ng-template>
 
 
-<!-- <mat-card *ngFor="let upload of uploads$ | async" class="upload-card"> -->
-<mat-card *ngFor="let upload of page.data | async" class="upload-card">
-  <!-- <p>{{upload | json}}</p> -->
+<mat-card *ngFor="let upload of ups.data | async" class="upload-card">
   <mat-card-header>
     <!-- <div mat-card-avatar class="example-header-image"></div> -->
     <mat-card-title>Uploaded by {{upload.name}}</mat-card-title>
@@ -56,15 +54,12 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <!-- <button mat-button>LIKE</button> -->
-    <!-- <button mat-raised-button color="primary" (click)="prevUpload(upload)">👈 Prev</button> -->
     <button mat-raised-button color="warn" *ngIf="isOwner(upload)" (click)="deleteUpload(upload)">Delete</button>
-    <!-- <button mat-raised-button (click)="nextUpload(upload)">Next 👉</button> -->
   </mat-card-actions>
 </mat-card>
 
 
 <div id="load-more">
 
-  <button mat-raised-button (click)="page.more()">Load more</button>
+  <button mat-raised-button (click)="ups.more()">Load more</button>
 </div>
