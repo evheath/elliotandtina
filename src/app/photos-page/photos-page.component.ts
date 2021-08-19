@@ -1,7 +1,7 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { AngularFirestore, DocumentData, QueryFn } from '@angular/fire/firestore';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { PaginationService } from '../pagination.service';
 import { SnackbarService } from '../snackbar.service';
 import { UserService } from '../user.service';
 import { UploadDataModel } from './upload.model';
@@ -11,23 +11,18 @@ import { UploadDataModel } from './upload.model';
   templateUrl: './photos-page.component.html',
   styleUrls: ['./photos-page.component.scss']
 })
-export class PhotosPageComponent implements OnInit, OnDestroy {
-
-
-  private subs = new Subscription();
+export class PhotosPageComponent implements OnInit {
   public isHovering: boolean;
   public files: File[] = [];
   public doingWork: boolean;
-  // public uploads$: BehaviorSubject<UploadDataModel[]> = new BehaviorSubject([]);
-  public uploads$: Observable<UploadDataModel[]>;
 
 
   constructor(
     public storage: AngularFireStorage,
     public db: AngularFirestore,
-    // private auth: AngularFireAuth,
     public user: UserService,
-    private snack: SnackbarService
+    private snack: SnackbarService,
+    public page: PaginationService,
   ) { }
 
   // needed for canDeactivate
@@ -106,42 +101,11 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  public nextUpload(upload: UploadDataModel) {
-    const query: QueryFn<DocumentData> = ref => ref.orderBy('timestamp', 'desc').startAfter(upload['timestamp']).limit(1)
-    this.setUploads(query)
-  }
-  public prevUpload(upload: UploadDataModel) {
-    const query: QueryFn<DocumentData> = ref => ref.orderBy('timestamp', 'desc').endBefore(upload['timestamp']).limitToLast(1)
-    this.setUploads(query)
-  }
-  private setUploads(query: QueryFn<DocumentData>) {
-
-    this.uploads$ = this.db.collection<UploadDataModel>("uploads", query).valueChanges()
-  }
-
-
 
   ngOnInit(): void {
     this.doingWork = false;
 
-    // get the uploads
-    // this.subs.add(this.db.collection<UploadDataModel>("uploads", ref => ref.orderBy('timestamp', 'desc').limit(1)).valueChanges()
-    //   .subscribe(docs => {
-    //     this.uploads$.next(docs)
-    //   })
-    // )
-    const query: QueryFn<DocumentData> = ref => ref.orderBy('timestamp', 'desc').limit(1)
-    this.setUploads(query)
-    // const derp = this.db.collection<UploadDataModel>("uploads", ref => ref.orderBy('timestamp', 'desc').limit(1)).snapshotChanges()
-    // derp.toPromise().then(thing => {
-    //   thing[0].payload.doc.data
-    // })
+    this.page.init('uploads', 'timestamp', { reverse: true, prepend: false })
 
-  }
-  ngOnDestroy() {
-    this.subs.unsubscribe();
-
-    // use for dates
-    // qualifiedDate = new DatePipe("en-US").transform(qualifiedDate.toDate(), "dd-MMM-yyyy");
   }
 }
