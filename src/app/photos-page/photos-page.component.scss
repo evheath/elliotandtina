@@ -34,3 +34,6 @@ progress::-webkit-progress-value {
 .mat-progress-spinner{
   display: inline-block;
 }
+.mat-card-image:first-child {
+  margin-top: 0;
+}
