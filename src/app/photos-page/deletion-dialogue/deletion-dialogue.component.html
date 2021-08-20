@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Delete Upload</h2>
+<div mat-dialog-content>
+  <p>Are you sure you want to delete this image?</p>
+  <img [src]="data.downloadURL">
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Do nothing</button>
+  <button mat-flat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+</div>

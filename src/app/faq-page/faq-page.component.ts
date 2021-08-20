@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaqPageComponent implements OnInit {
 
+  public theDate = new Date(2022, 6, 30)
+
   constructor() { }
 
   ngOnInit(): void {

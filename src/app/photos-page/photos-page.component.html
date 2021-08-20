@@ -1,0 +1,80 @@
+<div *ngIf="(user.rsvp$ | async)?.approved; else needApproval" class="dropzone" dropzone (hovered)="toggleHover($event)"
+  (dropped)="onDrop($event)" [class.hovering]="isHovering">
+
+
+
+
+
+  <h3>Drag and drop files here to upload</h3>
+  <p>or</p>
+  <div class="file">
+    <label class="file-label">
+
+
+
+
+      <input #fileInput class="file-input" type="file" (change)="onDrop($event.target.files)">
+
+
+
+
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fa fa-upload"></i>
+        </span>
+        <!-- <span class="file-label">
+          or choose a file…
+        </span> -->
+      </span>
+    </label>
+  </div>
+</div>
+
+<ng-template #needApproval>
+  <p *ngIf="(user.rsvp$ | async); else needRSVP"> To be able to upload pictures your account must be approved manually.
+    Please
+    contact me.</p>
+  <ng-template #needRSVP>
+    <p></p>
+    <p>To be able to upload pictures you must RSVP.</p>
+  </ng-template>
+</ng-template>
+
+
+<div class="centered" *ngIf="this.doingWork;">
+  <mat-spinner></mat-spinner>
+</div>
+
+
+<mat-card *ngFor="let upload of ups.data | async" class="centered">
+  <mat-card-header>
+    <!-- <div mat-card-avatar class="example-header-image"></div> -->
+    <mat-card-title>Uploaded by {{upload.name}}</mat-card-title>
+    <mat-card-subtitle>{{upload.timestamp | date}}</mat-card-subtitle>
+  </mat-card-header>
+  <a [href]="upload.downloadURL" target="_blank">
+    <img mat-card-image [src]="upload.downloadURL">
+  </a>
+  <mat-card-content *ngIf="upload.comment">
+    <p>
+      {{upload.comment}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions style="text-align: right;">
+    <button style="margin-right:1em;" mat-raised-button color="warn" *ngIf="isOwner(upload)"
+      (click)="openDialog(upload)">Delete</button>
+  </mat-card-actions>
+</mat-card>
+
+<div class="centered" *ngIf="ups.loading|async">
+  <mat-spinner></mat-spinner>
+</div>
+
+
+<div class="centered" *ngIf="!(ups.done|async); else noMoreUploads">
+  <button mat-raised-button (click)="ups.more()">Load more</button>
+</div>
+
+<ng-template #noMoreUploads>
+  <p style="margin-top: 1em;">You've reached the end!</p>
+</ng-template>

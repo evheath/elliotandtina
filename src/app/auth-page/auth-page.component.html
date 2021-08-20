@@ -23,11 +23,25 @@
       Logged in as <strong>{{ user.email }}</strong>
     </p>
 
-    <button mat-stroked-button (click)="handleSignout()">Logout</button>
 
-    <div></div>
+    <div>
 
-    <button style="margin-top: 2em;" mat-raised-button color="primary" routerLink="/rsvp"
-      fragment="content">RSVP!</button>
+      <button mat-stroked-button (click)="handleSignout()">Logout</button>
+    </div>
+
+    <div>
+      <button style="margin-top: 2em;" mat-raised-button color="primary" routerLink="/rsvp"
+        fragment="content">RSVP!</button>
+
+    </div>
+
+
+    <div>
+      <button style="margin-top: 2em;" mat-raised-button color="accent" routerLink="/photos" fragment="content">Upload
+        Pictures</button>
+
+
+    </div>
+
   </div>
 </div>

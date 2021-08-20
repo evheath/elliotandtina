@@ -3,6 +3,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 admin.initializeApp(); // only needs to be done once (within any file)
 const db = admin.firestore();
+const storage = admin.storage();
 
 export const onRsvpDocumentCreation = functions.firestore.document(`rsvp/{rsvpId}`).onCreate(async (snapshot, context) => {
   const incomingData = snapshot.data();
@@ -98,4 +99,9 @@ export const onRsvpDocumentUpdate = functions.firestore.document(`rsvp/{rsvpId}`
 
 
   return aggRef.set(next, { merge: true });
+});
+
+export const onUploadDocumentDelete = functions.firestore.document(`uploads/{uploadId}`).onDelete(async (snapshot, context) => {
+  const { path } = snapshot.data();
+  return storage.bucket('gs://elliotandtina.appspot.com/').file(path).delete();
 });

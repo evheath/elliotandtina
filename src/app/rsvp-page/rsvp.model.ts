@@ -6,5 +6,5 @@ export interface RsvpDataModel {
   attendees: number;
   phoneNumber?: string;
   email?: string;
-  authorized?: boolean;
+  approved?: boolean;
 }
