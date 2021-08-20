@@ -61,7 +61,7 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="warn" *ngIf="isOwner(upload)" (click)="deleteUpload(upload)">Delete</button>
+    <button mat-raised-button color="warn" *ngIf="isOwner(upload)" (click)="openDialog(upload)">Delete</button>
   </mat-card-actions>
 </mat-card>
 

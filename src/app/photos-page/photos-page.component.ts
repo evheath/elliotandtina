@@ -5,6 +5,8 @@ import { UploadService } from './upload.service';
 import { SnackbarService } from '../snackbar.service';
 import { UserService } from '../user.service';
 import { UploadDataModel } from './upload.model';
+import { MatDialog } from '@angular/material/dialog';
+import { DeletionDialogueComponent } from './deletion-dialogue/deletion-dialogue.component';
 
 @Component({
   selector: 'app-photos-page',
@@ -23,6 +25,7 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
     public user: UserService,
     private snack: SnackbarService,
     public ups: UploadService,
+    public dialog: MatDialog,
   ) {
   }
 
@@ -88,7 +91,7 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
     return upload.uid === this.user.uid
   }
 
-  public async deleteUpload(upload: UploadDataModel) {
+  private async deleteUpload(upload: UploadDataModel) {
     try {
       // the deletion of the actual image happens via firebase functions
       await this.db.doc(upload.path).delete()
@@ -97,6 +100,17 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
     } catch (e) {
       console.error(e)
       this.snack.simple("Problem deleting upload")
+    }
+  }
+
+  public async openDialog(upload: UploadDataModel) {
+    const deleteYesNo = await this.dialog.open(DeletionDialogueComponent, {
+      // width: '250px',
+      data: upload,
+    }).afterClosed().toPromise()
+
+    if (deleteYesNo) {
+      this.deleteUpload(upload);
     }
   }
 

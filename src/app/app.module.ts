@@ -34,9 +34,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { PhotosPageComponent } from './photos-page/photos-page.component';
 import { DropzoneDirective } from './dropzone.directive';
+import { DeletionDialogueComponent } from './photos-page/deletion-dialogue/deletion-dialogue.component';
 
 
 const firebaseConfig = {
@@ -59,7 +61,8 @@ const firebaseConfig = {
     EmailLoginComponent,
     RsvpPageComponent,
     PhotosPageComponent,
-    DropzoneDirective
+    DropzoneDirective,
+    DeletionDialogueComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +86,7 @@ const firebaseConfig = {
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
