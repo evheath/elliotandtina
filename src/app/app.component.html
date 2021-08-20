@@ -19,14 +19,6 @@
       <li><a routerLink="/upload">Upload<strong>Pictures</strong></a></li>
       <li><a routerLink="/rsvp">Coming?<strong>RSVP</strong></a></li>
     </ul> -->
-
-
-  </header>
-  <section>
-
-    <router-outlet id="content"></router-outlet>
-  </section>
-  <footer>
     <p>
       <a routerLink="/faq" fragment="content" routerLinkActive="active">FAQ</a> /
       <a routerLink="/venue" fragment="content" routerLinkActive="active">Venue</a> /
@@ -36,5 +28,14 @@
       <a routerLink="/auth" fragment="content" routerLinkActive="active">{{(afAuth.authState | async) ? 'Logout' :
         'Login'}}</a>
     </p>
+
+
+  </header>
+  <section>
+
+    <router-outlet id="content"></router-outlet>
+  </section>
+  <footer>
+    <p>Check out my <a target="_blank" href="https://github.com/evheath/wedding-angular">GitHub</a></p>
   </footer>
 </div>
