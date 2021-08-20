@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { UploadService } from './upload.service';
@@ -18,6 +18,7 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
   public files: File[] = [];
   public doingWork: boolean;
 
+  @ViewChild('fileInput') fileInput: ElementRef
 
   constructor(
     public storage: AngularFireStorage,
@@ -81,8 +82,9 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
     // we may as well restart the query
     this.ups.initUploads();
 
-    // clear the files array
+    // clean up
     this.files.splice(0);
+    this.fileInput.nativeElement.value = null // clears out the 'choose file' button
     this.doingWork = false;
   }
 
