@@ -58,34 +58,43 @@ export class PhotosPageComponent implements OnInit, OnDestroy {
   public async startUpload() {
     this.doingWork = true;
 
-    for (const file of this.files) {
-      const timestamp = Date.now()
-      const path = `uploads/${timestamp}_${file.name}`;
+    try {
 
-      await this.storage.upload(path, file)
+      for (const file of this.files) {
+        const timestamp = Date.now()
+        const path = `uploads/${timestamp}_${file.name}`;
 
-      const storageRef = this.storage.ref(path);
-      const downloadURL = await storageRef.getDownloadURL().toPromise();
-      let newUpload: UploadDataModel = {
-        path,
-        downloadURL,
-        likers: [],
-        uid: this.user.uid,
-        name: this.user.name,
-        timestamp,
+        await this.storage.upload(path, file)
+
+        const storageRef = this.storage.ref(path);
+        const downloadURL = await storageRef.getDownloadURL().toPromise();
+        let newUpload: UploadDataModel = {
+          path,
+          downloadURL,
+          likers: [],
+          uid: this.user.uid,
+          name: this.user.name,
+          timestamp,
+        }
+        await this.db.doc<UploadDataModel>(path).set(newUpload)
       }
-      await this.db.doc<UploadDataModel>(path).set(newUpload)
+      this.snack.simple("Images(s) uploaded!");
+
+      // since new data will be added to the 'top' of the collection
+      // we may as well restart the query after successful upload
+      this.ups.initUploads();
+    } catch (e) {
+      console.error(e)
+      this.snack.simple("Problem uploading your image(s)");
+    } finally {
+      // clean up
+      this.files.splice(0);
+      this.fileInput.nativeElement.value = null // clears out the 'choose file' button
+      this.doingWork = false;
     }
-    this.snack.simple("File(s) uploaded!");
 
-    // since new data will be added to the 'top' of the collection
-    // we may as well restart the query
-    this.ups.initUploads();
 
-    // clean up
-    this.files.splice(0);
-    this.fileInput.nativeElement.value = null // clears out the 'choose file' button
-    this.doingWork = false;
+
   }
 
 
