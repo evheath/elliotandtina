@@ -45,7 +45,9 @@ export const onRsvpDocumentUpdate = functions.firestore.document(`rsvp/{rsvpId}`
   const existingData = snapshot.before.data();
 
   // no meaningful change
-  if (existingData.attending === incomingData.attending && existingData.attendees === incomingData.attendees) {
+  if (existingData.attending === incomingData.attending
+    && existingData.attendees === incomingData.attendees
+    && existingData.name === incomingData.name) {
     return null;
   }
 
@@ -67,7 +69,27 @@ export const onRsvpDocumentUpdate = functions.firestore.document(`rsvp/{rsvpId}`
     namesOut
   };
 
-  // change from yes to no
+  // the name has changed
+  const oldName: string = existingData.name;
+  const newName: string = incomingData.name;
+  if (oldName !== newName) {
+    // they are yay
+    if (existingData.attending) {
+      const index = next.namesIn.indexOf(oldName);
+      if (index > -1) {
+        next.namesIn[index] = newName;
+      }
+    }
+    // they are nay
+    else {
+      const index = next.namesOut.indexOf(oldName);
+      if (index > -1) {
+        next.namesOut[index] = newName;
+      }
+    }
+  }
+
+  // change from yay to nay
   if (existingData.attending === true && incomingData.attending === false) {
     // remove name from namesIn
     const index = next.namesIn.indexOf(incomingData.name);
@@ -79,7 +101,8 @@ export const onRsvpDocumentUpdate = functions.firestore.document(`rsvp/{rsvpId}`
     // subtract attendeeCount
     next.attendeeCount -= existingData.attendees;
   }
-  // change from no to yes
+
+  // change from nay to yay
   if (existingData.attending === false && incomingData.attending === true) {
     // remove name from namesOut
     const index = next.namesOut.indexOf(incomingData.name);
@@ -91,11 +114,14 @@ export const onRsvpDocumentUpdate = functions.firestore.document(`rsvp/{rsvpId}`
     // add to attendeeCount
     next.attendeeCount += incomingData.attendees;
   }
+
   // already marked as attending, but a change in number of attendees
   if (existingData.attending && incomingData.attending && existingData.attendees !== incomingData.attendees) {
     next.attendeeCount -= existingData.attendees;
     next.attendeeCount += incomingData.attendees;
   }
+
+
 
 
   return aggRef.set(next, { merge: true });
