@@ -64,6 +64,8 @@ export class RsvpPageComponent implements OnInit {
       take(1)
     ).toPromise().then(rsvp => {
       this.rsvpForm.patchValue(rsvp)
+    }).catch(e => {
+      // If the document doesn't exist an error will occur, no big deal
     });
 
   }
@@ -78,7 +80,9 @@ export class RsvpPageComponent implements OnInit {
         Validators.max(12),
         Validators.min(0)
       ]),
-      attending: false,
+      attending: new FormControl(null, [
+        Validators.required
+      ]),
       comment: "",
     })
   }
