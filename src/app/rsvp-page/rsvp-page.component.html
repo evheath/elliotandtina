@@ -10,11 +10,12 @@
 
     <mat-radio-group formControlName="attending">
       <div>
-        <mat-radio-button [value]='true'>I am planning on attending</mat-radio-button>
+        <mat-radio-button [value]='true'>I am planning on attending (Yay)</mat-radio-button>
       </div>
       <div>
-        <mat-radio-button [value]='false'>I am not planning on attending</mat-radio-button>
+        <mat-radio-button [value]='false'>I am not planning on attending (Nay)</mat-radio-button>
       </div>
+      <mat-error *ngIf="rsvpForm.controls['attending'].invalid">Yay or Nay required</mat-error>
     </mat-radio-group>
 
     <div *ngIf="rsvpForm.value.attending">
