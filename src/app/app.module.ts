@@ -39,6 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PhotosPageComponent } from './photos-page/photos-page.component';
 import { DropzoneDirective } from './dropzone.directive';
 import { DeletionDialogueComponent } from './photos-page/deletion-dialogue/deletion-dialogue.component';
+import { ApprovalPageComponent } from './approval-page/approval-page.component';
 
 
 const firebaseConfig = {
@@ -62,7 +63,8 @@ const firebaseConfig = {
     RsvpPageComponent,
     PhotosPageComponent,
     DropzoneDirective,
-    DeletionDialogueComponent
+    DeletionDialogueComponent,
+    ApprovalPageComponent
   ],
   imports: [
     BrowserModule,
