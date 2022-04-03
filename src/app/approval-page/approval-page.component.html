@@ -1,0 +1,20 @@
+<p>Head count: {{(aggregation$ | async)?.attendeeCount}}</p>
+
+<mat-card *ngFor="let rsvp of rsvps$ | async" class="approvalCards">
+  <mat-card-header>
+    <mat-card-title>{{rsvp.name}}</mat-card-title>
+    <mat-card-subtitle>{{rsvp.attending? "Attending": "Not attending"}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{rsvp.comment}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions style="text-align: right;">
+    <button *ngIf="rsvp.approved; else approvalPending" style="margin-right:1em;" mat-raised-button color="warn"
+      (click)="unApproveUser(rsvp)">Remove approval</button>
+    <ng-template #approvalPending>
+      <button style="margin-right:1em;" mat-raised-button color="primary" (click)="approveUser(rsvp)">Approve</button>
+    </ng-template>
+  </mat-card-actions>
+</mat-card>
