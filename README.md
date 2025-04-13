@@ -1,24 +1,16 @@
-# WeddingAngular
+# [Elliot and Tina Wedding App](https://elliotandtina.web.app/faq)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.15.
+![screenshot](https://o8jsjsxk9g.ufs.sh/f/Y3NBzhpqodc37NyIRBjKyp7WizfuerN4wJadgCIkEPGRt56A)
 
-## Development server
+A Zola/Knot-like web app I made for our wedding.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+It allows guests to RSVP, read about the venue, find lodging, and upload photos
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-
-## Relevant docs
-
-[Angular](https://angular.io/docs)
-
-[Angular Material](https://material.angular.io/)
-
-[Angularfire](https://github.com/angular/angularfire)
+## Tech Stack
+- Angular
+- TypeScript
+- RXJS
+- Firebase
+- Firestore
+- SCSS
+- MaterialUI
